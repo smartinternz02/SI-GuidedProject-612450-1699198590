@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="home">
+      <div class="form">
+        <h1>Calpred</h1>
+        <h3>Calorie burnt predictor</h3>
+        <p>  
+            Calorie burnt prediction using machine learning involves employing algorithms to estimate the amount of calories an individual expends during a specific activity or period. This process leverages data inputs such as heart rate, duration, and potentially other biometric factors. By training models on large datasets, the algorithm learns to make accurate predictions. This technology holds great potential for personalized fitness tracking, allowing users to monitor and optimize their energy expenditure for better health and fitness outcomes. It enables individuals to make informed decisions about their physical activity levels and dietary choices, contributing to a more balanced and healthy lifestyle.
+        </p>
+        <div class="btn-box">
+          <a href="{{ url_for ('login') }}">Login</a>
+          <a href="#section1">Guest User</a>
+          
+        </div>
+      </div>
+    </section>
+
+    {% include 'calorie_form.html' %}
+    {% if calories %}
+      <h2 style="text-align: center;">Calories Burnt: {{ calories }}</h2>
+    {% endif %}
+    <section class="home1">
+      <div id="section2" class="leader">
+        <h2>Contact Us</h2>
+        <form action="https://formsubmit.co/thecalpredapp@gmail.com" method="POST">
+          <div class="row100">
+            <div class="col">
+              <div class="inputbox">
+                <input type="text" name="first_name" required="required">
+                <span class="text">First Name</span>
+                <span class="line"></span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="inputbox">
+                <input type="text" name="last_name" required="required">
+                <span class="text">Last Name</span>
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row100">
+            <div class="col">
+              <div class="inputbox">
+                <input type="text" name="email" required="required">
+                <span class="text">Email</span>
+                <span class="line"></span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="inputbox">
+                <input type="text" name="mobile_no" required="required">
+                <span class="text">Mobile no</span>
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row100">
+            <div class="col">
+              <div class="inputbox">
+                
+                <input type="text" name="query" required="required">
+                <span class="text">Type your query here...</span>
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row100">
+            <div class="col">
+              <input type="submit" value="send">
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="home3">
+      <div id="section3" class = form1>
+        <h1>How it works</h1>
+        <p>  
+          Welcome to our personalized fitness experience! When you sign up or use our platform as a guest, we collect essential details to understand your body and fitness level. Our platform utilizes a state-of-the-art machine learning algorithm to process the data you provide.<br> This algorithm has been trained on a diverse set of inputs to accurately predict the calories burned during various workout activities.Based on your profile and the specifics of your workout, our system calculates the estimated number of calories you burn. This personalized analysis takes into account your unique attributes, ensuring a more accurate result compared to generic calculators.<br><br>Don't want to create an account? No problem! You can still benefit from our platform as a guest. Enter your workout details, and our system will generate a calorie estimate without requiring any personal information.
+        </p>
+        <div class="btn-box"> 
+          <a href="#section3">Get the Code</a>
+        </div>
+      </div>
+    </section>
+{% endblock %}

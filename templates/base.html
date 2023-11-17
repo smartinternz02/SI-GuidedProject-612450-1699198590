@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalPred</title>
+  <link rel="stylesheet" href="/static/st.css">
+  <style>
+    /* Addded this style for Flask flash messages */
+    .flash-container {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px; 
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flashes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .flashes li {
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #e40808; /* Adjust background color */
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+  {% block styles %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+      <a href="/" class="logo">Calpred.</a>
+      <nav class="navbar">
+        <a href="{{ url_for('main') }}">Home</a>
+        <a href="https://drive.google.com/file/d/1ZrZzAr6-9rglOji6B6J3TyV06gfXxJtU/view?usp=sharing" target="_blank">About us</a>
+        <a href="#section3">How it works</a>
+        <a href="#section2">Contact us</a>
+        {% block dashpred %}{% endblock %}
+      </nav>
+
+    </header>
+
+    {% block content %}
+    
+    {% endblock %}
+
+    <!-- For Flask Flash Messaging System -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-container">
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% endwith %}
+  
+  </body>
+</html>

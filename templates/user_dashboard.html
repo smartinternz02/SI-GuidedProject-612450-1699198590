@@ -1,0 +1,157 @@
+<!-- user_dashboard.html -->
+{% extends "base.html" %}
+
+{% block styles %}
+
+<style>
+    body{
+        background-color: rgb(7, 7, 27);
+        color: #ffffff;
+    }
+    .container {
+        margin-top: 100px;
+    }
+
+    .name{
+        text-align: center;
+        font-size: 25px;
+        margin-top: -20px;
+        margin-left: 10px;
+    }
+
+    .name:hover{
+        opacity: 0.7;
+    }
+
+    h1 {
+        text-align: center;
+        color: #007BFF;
+    }
+
+    h2 {
+        text-align: center;
+        color: #6c757d; /* Original greyish color */
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto;
+        max-width: 150px; /* Adjust the max-width as needed */
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out; /* Smooth transition for the hover effect */
+    }
+
+    .logo:hover {
+        transform: scale(1.1); /* Scale up the logo on hover */
+    }
+
+    .card {
+        margin-top: 20px;
+        opacity: 0; /* Initially set opacity to 0 */
+        animation: fadeIn 2s ease-out forwards; /* Use forwards to keep the final style after animation */
+        transition: transform 0.3s ease-in-out; /* Smooth transition for the hover effect */
+    }
+
+    .card:hover {
+        transform: scale(1.05); /* Scale up the card on hover */
+    }
+
+    @keyframes slideFromLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideFromRight {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+{% endblock %}
+
+{% block dashpred %}
+<a href="{{ url_for('home') }}">Predictor</a>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        <h1>USER DASHBOARD</h1>
+        <h2>Track Your Fitness Journey</h2>
+
+        <!-- Add the user logo -->
+        
+        <p class="name">{{username}}</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="animation-delay: 0.5s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Statistics through bar chart</h5>
+                        <!-- Display the Plotly bar chart -->
+                        <div id="exercise-pie-chart">{{ bar_chart|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="animation-delay: 1s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Statistics through line chart</h5>
+                        <!-- Display the Plotly line chart -->
+                        <div id="calorie-line-chart">{{ line_chart|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="animation-delay: 1.5s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Statistics through pie chart </h5>
+                        <!-- Display the Plotly pie chart -->
+                        <div id="exercise-pie-chart">{{pie_chart|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="animation-delay: 1.5s;">
+                    <div class="card-body">
+                        <h5 class="card-title">Statistics through scatter plot</h5>
+                        
+                        <div id="exercise-pie-chart">{{scatter_plot|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('h1').style.animation = 'slideFromLeft 1s ease-out';
+            document.querySelector('h2').style.animation = 'slideFromRight 1s ease-out';
+            document.querySelectorAll('.card').forEach(function(card, index) {
+                card.style.animation = 'fadeIn 2s ease-out forwards';
+                card.style.animationDelay = index * 0.5 + 's'; // Add delay for each card
+            });
+        });
+    </script>
+{% endblock %}
